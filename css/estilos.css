@@ -1,0 +1,426 @@
+/*AGENDA DE CONTACTOS*/
+
+:root {
+    --fondo: #17121d;
+    --tarjeta: #251e2d;
+    --texto: #eeeeee;
+    --secundario: #c4b8ce;
+    --morado: #8652b5;
+    --morado-hover: #75439f;
+    --borde: #51445d;
+    --rojo: #c94d58;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    color: var(--texto);
+    background: var(--fondo);
+    font-family: Arial, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Botones generales */
+
+.btn-principal,
+.btn-secundario,
+.btn-salir {
+    display: inline-block;
+    padding: 11px 17px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.btn-principal {
+    color: white;
+    background: var(--morado);
+    border: 1px solid var(--morado);
+}
+
+.btn-principal:hover {
+    background: var(--morado-hover);
+}
+
+.btn-secundario {
+    color: #e0c9f5;
+    background: transparent;
+    border: 1px solid var(--borde);
+}
+
+.btn-secundario:hover {
+    background: #35283f;
+}
+
+.btn-salir {
+    color: white;
+    background: #8d3945;
+    border: 1px solid #8d3945;
+}
+
+.btn-salir:hover {
+    background: var(--rojo);
+}
+
+/* Mensajes */
+
+.mensaje {
+    padding: 10px;
+    color: #f0dafa;
+    background: #392844;
+    border: 1px solid var(--borde);
+    border-radius: 5px;
+}
+
+/*REGISTRO E INICIO DE SESIÓN*/
+
+body.pagina-auth {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.pagina-auth .formulario {
+    width: 100%;
+    max-width: 430px;
+    padding: 28px;
+    margin: 0;
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+}
+
+.pagina-auth .formulario h1 {
+    margin-top: 0;
+    font-size: 26px;
+}
+
+.pagina-auth .formulario p {
+    color: var(--secundario);
+    line-height: 1.5;
+}
+
+.pagina-auth .formulario label {
+    display: block;
+    margin-top: 14px;
+    margin-bottom: 6px;
+}
+
+.pagina-auth .formulario input {
+    width: 100%;
+    height: 42px;
+    padding: 10px;
+    color: white;
+    background: #19141f;
+    border: 1px solid var(--borde);
+    border-radius: 5px;
+}
+
+.pagina-auth .formulario input:focus {
+    outline: 1px solid var(--morado);
+}
+
+.pagina-auth .formulario form {
+    margin-top: 15px;
+}
+
+.pagina-auth .formulario button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    color: white;
+    background: var(--morado);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pagina-auth .formulario button:hover {
+    background: var(--morado-hover);
+}
+
+.pagina-auth .texto-enlace {
+    margin-top: 18px;
+    margin-bottom: 10px;
+}
+
+/*PANEL PRINCIPAL*/
+
+body.pagina-panel {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.pagina-panel .panel {
+    width: 100%;
+    max-width: 600px;
+    padding: 35px;
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.pagina-panel .panel h1 {
+    margin-top: 0;
+}
+
+.pagina-panel .panel h2 {
+    color: #c69be7;
+}
+
+.pagina-panel .panel p {
+    color: var(--secundario);
+}
+
+.panel-navegacion {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+/*AGENDA DE CONTACTOS*/
+
+body.pagina-contactos {
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.agenda-contenedor {
+    max-width: 1150px;
+    margin: 20px auto;
+    padding: 28px;
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+}
+
+.agenda-cabecera {
+    margin-bottom: 22px;
+}
+
+.agenda-cabecera h1 {
+    margin-top: 0;
+}
+
+.agenda-cabecera p {
+    color: var(--secundario);
+}
+
+.agenda-navegacion {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0 30px;
+}
+
+.lista-contactos h2 {
+    margin-bottom: 15px;
+}
+
+.tabla-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.tabla-contactos {
+    width: 100%;
+    min-width: 750px;
+    border-collapse: collapse;
+    background: #1d1724;
+}
+
+.tabla-contactos th {
+    padding: 13px;
+    color: white;
+    background: #392b45;
+    text-align: left;
+}
+
+.tabla-contactos td {
+    padding: 12px;
+    border-bottom: 1px solid var(--borde);
+}
+
+.tabla-contactos tbody tr:hover {
+    background: #30253a;
+}
+
+.acciones {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.acciones form {
+    margin: 0;
+}
+
+.acciones .btn {
+    padding: 8px 11px;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.btn-editar {
+    color: white;
+    background: var(--morado);
+    border: 1px solid var(--morado);
+}
+
+.btn-editar:hover {
+    background: var(--morado-hover);
+}
+
+.btn-eliminar {
+    color: white;
+    background: #a63e4a;
+    border: 1px solid #a63e4a;
+    cursor: pointer;
+}
+
+.btn-eliminar:hover {
+    background: var(--rojo);
+}
+
+.mensaje-vacio {
+    padding: 25px;
+    margin-top: 15px;
+    background: #30253a;
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    text-align: center;
+}
+
+.mensaje-vacio p {
+    color: var(--secundario);
+}
+
+/*AGREGAR Y EDITAR CONTACTOS*/
+
+body.pagina-formulario {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.pagina-formulario .formulario-contacto {
+    width: 100%;
+    max-width: 500px;
+    padding: 28px;
+    margin: 0;
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+}
+
+.formulario-contacto h1 {
+    margin-top: 0;
+    font-size: 26px;
+}
+
+.formulario-contacto > p {
+    color: var(--secundario);
+    line-height: 1.5;
+}
+
+.formulario-contacto form {
+    margin-top: 18px;
+}
+
+.formulario-contacto label {
+    display: block;
+    margin-top: 13px;
+    margin-bottom: 6px;
+}
+
+.formulario-contacto input {
+    display: block;
+    width: 100%;
+    height: 42px;
+    padding: 10px;
+    color: white;
+    background: #19141f;
+    border: 1px solid var(--borde);
+    border-radius: 5px;
+}
+
+.formulario-contacto input:focus {
+    outline: 1px solid var(--morado);
+}
+
+.formulario-contacto button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 22px;
+    color: white;
+    background: var(--morado);
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.formulario-contacto button:hover {
+    background: var(--morado-hover);
+}
+
+.formulario-contacto .btn-volver {
+    display: block;
+    width: fit-content;
+    margin: 16px auto 0;
+}
+
+/*DISEÑO RESPONSIVO*/
+
+@media (max-width: 768px) {
+    body.pagina-contactos {
+        padding: 10px;
+    }
+
+    .agenda-contenedor {
+        padding: 18px 12px;
+    }
+
+    .agenda-navegacion,
+    .panel-navegacion {
+        flex-direction: column;
+    }
+
+    .agenda-navegacion a,
+    .panel-navegacion a {
+        width: 100%;
+    }
+
+    .pagina-panel .panel {
+        padding: 25px 18px;
+    }
+}
+
+@media (max-width: 500px) {
+    .pagina-auth .formulario,
+    .pagina-formulario .formulario-contacto {
+        padding: 22px 18px;
+    }
+
+    .pagina-auth .formulario h1,
+    .formulario-contacto h1 {
+        font-size: 23px;
+    }
+}
