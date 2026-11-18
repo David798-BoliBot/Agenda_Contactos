@@ -1,3 +1,4 @@
+
 <?php
 
 session_start();
@@ -37,6 +38,13 @@ if (!$id || $id < 1) {
     exit;
 }
 
+// Obtener las categorías disponibles
+$consulta_categorias = $conexion->query(
+    "SELECT id, nombre FROM categorias ORDER BY nombre ASC"
+);
+
+$categorias = $consulta_categorias->fetchAll();
+
 // Buscar el contacto y comprobar que pertenezca al usuario
 $consulta = $conexion->prepare(
     "SELECT * FROM contactos
@@ -64,6 +72,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $correo = trim($_POST["correo"] ?? "");
     $ciudad = trim($_POST["ciudad"] ?? "");
     $pais = trim($_POST["pais"] ?? "");
+    $id_categoria = filter_input(INPUT_POST, "id_categoria", FILTER_VALIDATE_INT);
+    $favorito = $_POST["favorito"] ?? "";
+
+    // Comprobar que la categoría seleccionada exista
+    $ids_categorias = array_map(
+        "intval",
+        array_column($categorias, "id")
+    );
 
     if ($nombre === "" || $telefono === "") {
 
@@ -73,6 +89,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $mensaje = "El correo electrónico no es válido.";
 
+    } elseif (!$id_categoria || !in_array($id_categoria, $ids_categorias, true)) {
+
+        $mensaje = "La categoría seleccionada no es válida.";
+
+    } elseif (!in_array($favorito, ["0", "1"], true)) {
+
+        $mensaje = "La opción de favorito no es válida.";
+
     } else {
 
         $actualizar = $conexion->prepare(
@@ -81,7 +105,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                  telefono = :telefono,
                  correo = :correo,
                  ciudad = :ciudad,
-                 pais = :pais
+                 pais = :pais,
+                 id_categoria = :id_categoria,
+                 favorito = :favorito
              WHERE id = :id AND id_usuario = :usuario_id"
         );
 
@@ -91,6 +117,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             ":correo" => $correo !== "" ? $correo : null,
             ":ciudad" => $ciudad !== "" ? $ciudad : null,
             ":pais" => $pais !== "" ? $pais : null,
+            ":id_categoria" => $id_categoria,
+            ":favorito" => (int) $favorito,
             ":id" => $id,
             ":usuario_id" => $usuario_id
         ]);
@@ -105,10 +133,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $contacto["correo"] = $correo;
     $contacto["ciudad"] = $ciudad;
     $contacto["pais"] = $pais;
+    $contacto["id_categoria"] = $id_categoria;
+    $contacto["favorito"] = $favorito;
 }
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -177,6 +206,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     id="pais"
                     name="pais"
                     value="<?= htmlspecialchars($contacto["pais"] ?? "", ENT_QUOTES, 'UTF-8') ?>">
+
+                <label for="id_categoria">Categoría:</label>
+                <select id="id_categoria" name="id_categoria" required>
+                    <?php foreach ($categorias as $categoria): ?>
+                        <option
+                            value="<?= (int) $categoria["id"] ?>"
+                            <?= (int) $contacto["id_categoria"] === (int) $categoria["id"] ? "selected" : "" ?>>
+                            <?= htmlspecialchars($categoria["nombre"], ENT_QUOTES, 'UTF-8') ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+
+                <label for="favorito">¿Es un contacto favorito?</label>
+                <select id="favorito" name="favorito" required>
+                    <option value="0" <?= (string) $contacto["favorito"] === "0" ? "selected" : "" ?>>
+                        No
+                    </option>
+
+                    <option value="1" <?= (string) $contacto["favorito"] === "1" ? "selected" : "" ?>>
+                        Sí
+                    </option>
+                </select>
 
                 <button type="submit">Guardar cambios</button>
 
